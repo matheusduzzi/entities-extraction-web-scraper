@@ -16,8 +16,8 @@ if __name__ == "__main__":
 
     amazon_url = "https://www.amazon.ca/s?k=computers&crid=1LUXGQOD2ULFD&sprefix=%2Caps%2C94&ref=nb_sb_ss_recent_1_0_recent"
 
-    async def scrape_with_playwright(url: str, tags, **kwargs):
-        html_content = await ascrape_playwright(url, tags)
+    async def scrape_with_playwright(url: str, **kwargs):
+        html_content = await ascrape_playwright(url)
 
         print("Extracting content with LLM")
 
@@ -30,6 +30,6 @@ if __name__ == "__main__":
     # Scrape and Extract with LLM
     asyncio.run(scrape_with_playwright(
         url=cnn_url,
-        tags=["span"],
+        #tags=["span"],
         schema_pydantic=SchemaNewsWebsites
     ))
