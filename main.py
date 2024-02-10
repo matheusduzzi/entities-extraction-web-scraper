@@ -2,7 +2,7 @@ import asyncio
 import pprint
 
 from ai_extractor import extract
-from schemas import SchemaNewsWebsites, ecommerce_schema
+from schemas import news_schema
 from scrape import ascrape_playwright
 
 # TESTING
@@ -10,11 +10,7 @@ if __name__ == "__main__":
     token_limit = 4000
 
     # News sites mostly have <span> tags to scrape
-    cnn_url = "https://edition.cnn.com/"
-    wsj_url = "https://www.wsj.com"
-    nyt_url = "https://www.nytimes.com/ca/"
-
-    amazon_url = "https://www.amazon.ca/s?k=computers&crid=1LUXGQOD2ULFD&sprefix=%2Caps%2C94&ref=nb_sb_ss_recent_1_0_recent"
+    bbc_url = "https://www.bbc.com/"
 
     async def scrape_with_playwright(url: str, tags, **kwargs):
         html_content = await ascrape_playwright(url, tags)
@@ -29,7 +25,7 @@ if __name__ == "__main__":
 
     # Scrape and Extract with LLM
     asyncio.run(scrape_with_playwright(
-        url=cnn_url,
-        tags=["span"],
-        schema_pydantic=SchemaNewsWebsites
+        url=bbc_url,
+        tags=["a"],
+        schema=news_schema
     ))
